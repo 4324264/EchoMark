@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f4ef" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <title>EchoMark v0.2.2 — 听见进度，标记所读</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <a class="brand" href="#" aria-label="EchoMark 首页">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span>EchoMark</span>
+        </a>
+        <div class="topbar-note"><span class="live-dot"></span><span>网页抄写标记</span></div>
+      </header>
+
+      <main>
+        <section class="intro">
+          <div class="eyebrow">READ · TRACK · CONTINUE</div>
+          <h1>读到哪里，<em>标到哪里。</em></h1>
+          <p>导入文档或粘贴文本。抄写时自然读到哪个字，EchoMark 就把标记推进到哪里；也可以用语音命令跳转、快进或撤回。</p>
+        </section>
+
+        <section class="workspace" aria-label="跟读工作台">
+          <aside class="control-panel">
+            <div class="panel-heading">
+              <div><span class="step-label">01 / SOURCE</span><h2>选择内容</h2></div>
+            </div>
+
+            <div class="source-actions">
+              <label class="upload-card" for="file-input">
+                <span class="upload-icon" aria-hidden="true">↑</span>
+                <span><strong>导入文档</strong><small>支持 TXT、Markdown、HTML、DOCX、PDF</small></span>
+                <input id="file-input" type="file" accept=".txt,.md,.markdown,.html,.htm,.docx,.pdf,text/plain,text/markdown,text/html,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" />
+              </label>
+              <button class="text-toggle" id="paste-toggle" type="button">或者粘贴 / 输入文本 <span>＋</span></button>
+              <div class="paste-area hidden" id="paste-area">
+                <textarea id="paste-input" rows="5" placeholder="把要跟读的内容粘贴到这里…"></textarea>
+                <button class="small-button" id="load-text" type="button">载入内容</button>
+              </div>
+            </div>
+
+            <div class="divider"></div>
+            <div class="panel-heading compact">
+              <div><span class="step-label">02 / LISTEN</span><h2>监听设置</h2></div>
+            </div>
+            <label class="field-label" for="language-select">识别语言</label>
+            <select id="language-select">
+              <option value="zh-CN">中文（普通话）</option>
+              <option value="en-US">English (US)</option>
+              <option value="ja-JP">日本語</option>
+              <option value="ko-KR">한국어</option>
+            </select>
+            <details class="appearance-settings">
+              <summary>阅读外观</summary>
+              <div class="color-fields">
+                <label for="background-color">界面背景</label><input id="background-color" type="color" value="#f5f4ef" />
+                <label for="highlight-color">标记颜色</label><input id="highlight-color" type="color" value="#d7ead7" />
+                <label for="text-color">正文颜色</label><input id="text-color" type="color" value="#50534c" />
+              </div>
+            </details>
+            <div class="voice-tip"><span class="tip-icon">✳</span><span>自然朗读即可自动标记。也可说“跳转到……” “快进到……”或“撤回到……”，再接文中的一段文字、百分比或“开头 / 结尾”。</span></div>
+
+            <div class="session-controls">
+              <button id="start-button" class="start-button" type="button"><span class="mic-icon">●</span><span>开始标记抄写</span></button>
+              <button id="stop-button" class="stop-button hidden" type="button">暂停标记</button>
+              <button id="reset-button" class="reset-button" type="button" title="重置阅读进度">↺</button>
+            </div>
+            <p class="privacy-note">麦克风只在跟读时启用。语音识别由当前浏览器提供。</p>
+          </aside>
+
+          <section class="reading-panel" aria-label="阅读内容">
+            <div class="reading-toolbar">
+              <div class="doc-meta"><span class="doc-icon">▤</span><div><strong id="document-name">尚未载入内容</strong><small id="document-meta">导入文件或粘贴文本开始</small></div></div>
+              <button id="font-button" class="icon-button" type="button" aria-label="调整字号" title="调整字号">Aa</button>
+            </div>
+
+            <div class="progress-area">
+              <div class="progress-caption"><span><span class="progress-dot"></span><span id="status-text">等待开始</span></span><span id="progress-percent">0%</span></div>
+              <div class="progress-track"><div class="progress-fill" id="progress-fill"></div><span class="progress-caret" id="progress-caret"></span></div>
+              <div class="progress-count"><span id="progress-count">0 / 0 字</span><span id="read-time">约 0 分钟</span></div>
+            </div>
+
+            <div class="document-wrap" id="document-wrap">
+              <div class="empty-state" id="empty-state">
+                <div class="empty-illustration"><span class="page-line one"></span><span class="page-line two"></span><span class="page-line three"></span><span class="bookmark"></span></div>
+                <strong>你的阅读位置会出现在这里</strong>
+                <p>导入文档后，已读内容会自动高亮，当前位置也会跟着朗读移动。</p>
+              </div>
+              <article id="document-content" class="document-content hidden" tabindex="0" aria-describedby="selection-hint"></article>
+            </div>
+
+            <div class="selection-hint" id="selection-hint">选中正文中的一段文字，可手动调整标记位置。</div>
+
+            <div class="recognition-bar">
+              <span class="recognition-led" id="recognition-led"></span>
+              <div><small>最近听到</small><p id="recognized-text">抄写时自然读出，识别结果会显示在这里</p></div>
+              <span class="listening-badge" id="listening-badge">待机</span>
+            </div>
+            <div class="position-menu hidden" id="position-menu" role="dialog" aria-label="调整标记位置">
+              <span class="selection-preview" id="selection-preview"></span>
+              <div class="position-menu-actions">
+                <button type="button" data-position-action="jump">跳转到这里</button>
+                <button type="button" data-position-action="rewind">撤回到这里</button>
+                <button type="button" data-position-action="fast-forward">快进到选区后</button>
+                <button type="button" class="quiet-action" data-position-action="cancel">不操作</button>
+              </div>
+            </div>
+          </section>
+        </section>
+
+        <footer class="footnote"><span>EchoMark v0.2.2</span><span>网页端 · 文档与阅读进度保存在当前浏览器</span><a href="README.md">产品与实现说明 ↗</a></footer>
+      </main>
+    </div>
+    <script src="app.js"></script>
+    <script>if ('serviceWorker' in navigator && location.protocol.startsWith('http')) navigator.serviceWorker.register('./sw.js').catch(() => {});</script>
+  </body>
+</html>

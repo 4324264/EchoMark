@@ -43,7 +43,8 @@ DOCX 使用浏览器内置 `DecompressionStream` 提取正文。PDF 导入时按
 | `icon.svg` | 应用图标 |
 | `.github/` | Issue 表单与 Pull Request 模板 |
 | `versions/v0.2.0/` | 带语音及手动位置命令的独立版本 |
-| `versions/v0.2.1/` | 修复正文漏字、匹配回溯和识别会话隔离的版本；Pages 部署目标 |
+| `versions/v0.2.1/` | 修复正文漏字、匹配回溯和识别会话隔离的版本 |
+| `versions/v0.2.2/` | 电脑、平板和手机视口自适应的版本；当前 Pages 部署目标 |
 
 GitHub Pages 由 `.github/workflows/deploy-pages.yml` 部署。仓库设置中的 Pages Source 需要选择 **GitHub Actions**。
 
