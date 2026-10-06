@@ -4,6 +4,8 @@
 
 EchoMark 是一个网页阅读进度标记工具。开始监听后，抄写时自然读出或小声念到的内容会推动标记；跳过的文字会结合附近内容匹配。无需逐字朗读，也可以安静手抄。
 
+在线版本（GitHub Pages 部署完成后）：<https://4324264.github.io/EchoMark/>
+
 ## 功能
 
 - 导入 TXT、Markdown、HTML、DOCX 和可提取文字的 PDF，也可以粘贴文本。
@@ -40,6 +42,10 @@ DOCX 使用浏览器内置 `DecompressionStream` 提取正文。PDF 导入时按
 | `manifest.webmanifest` | PWA 名称、颜色和图标设置 |
 | `icon.svg` | 应用图标 |
 | `.github/` | Issue 表单与 Pull Request 模板 |
+| `versions/v0.2.0/` | 带语音及手动位置命令的独立版本 |
+| `versions/v0.2.1/` | 修复正文漏字、匹配回溯和识别会话隔离的版本；Pages 部署目标 |
+
+GitHub Pages 由 `.github/workflows/deploy-pages.yml` 部署。仓库设置中的 Pages Source 需要选择 **GitHub Actions**。
 
 ## 隐私和限制
 
