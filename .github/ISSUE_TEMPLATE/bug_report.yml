@@ -1,0 +1,53 @@
+name: 问题报告
+description: 报告网页功能或兼容性问题
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请先搜索现有 Issue。不要附上包含个人信息的文档、录音或账户凭据。
+  - type: input
+    id: browser
+    attributes:
+      label: 浏览器和版本
+      placeholder: 例如 Chrome 130 / Edge 130
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 按顺序说明如何触发问题。
+      placeholder: |
+        1. 打开……
+        2. 导入……
+        3. 点击……
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: 实际结果
+    validations:
+      required: true
+  - type: dropdown
+    id: language
+    attributes:
+      label: 识别语言（如适用）
+      options:
+        - 不适用
+        - 中文（普通话）
+        - English (US)
+        - 日本語
+        - 한국어
+  - type: textarea
+    id: logs
+    attributes:
+      label: 错误信息（可选）
+      description: 粘贴已移除个人信息和令牌的错误文本。

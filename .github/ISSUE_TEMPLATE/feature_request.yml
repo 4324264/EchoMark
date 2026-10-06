@@ -1,0 +1,26 @@
+name: 功能建议
+description: 提出网页端功能或体验改进
+title: "[Feature] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请描述实际使用场景，避免在提案中包含私人文件或个人数据。
+  - type: textarea
+    id: problem
+    attributes:
+      label: 你希望解决什么问题？
+      description: 描述目前遇到的阻碍。
+    validations:
+      required: true
+  - type: textarea
+    id: solution
+    attributes:
+      label: 你希望它如何工作？
+      description: 描述预期的网页行为或操作流程。
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: 其他方案或补充背景（可选）
