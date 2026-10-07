@@ -1,10 +1,10 @@
-name: Deploy EchoMark v0.2.7 to GitHub Pages
+name: Deploy EchoMark v0.2.8 to GitHub Pages
 
 on:
   push:
     branches: [main]
     paths:
-      - "versions/v0.2.7/**"
+      - "versions/v0.2.8/**"
       - ".github/workflows/deploy-pages.yml"
   workflow_dispatch:
 
@@ -31,7 +31,7 @@ jobs:
       - name: Upload website files
         uses: actions/upload-pages-artifact@v4
         with:
-          path: versions/v0.2.7
+          path: versions/v0.2.8
       - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@v4
