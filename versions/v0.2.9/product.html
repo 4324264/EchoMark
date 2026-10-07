@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#f5f4ef" />
+    <title>EchoMark 产品设计与实现说明</title>
+    <link rel="icon" href="icon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell product-shell">
+      <header class="topbar">
+        <a class="brand" href="./" aria-label="返回 EchoMark">
+          <span class="brand-mark" aria-hidden="true"><span></span><span></span><span></span></span>
+          <span>EchoMark</span>
+        </a>
+        <a class="product-back" href="./">返回抄写标记 ↗</a>
+      </header>
+      <main class="product-main">
+        <div class="eyebrow">WHY · HOW · PRIVACY</div>
+        <h1>产品设计与实现说明</h1>
+        <p class="product-lead">EchoMark 的目标很简单：让抄写者专注于原文和手上的工作，同时知道自己已经抄到哪里。</p>
+
+        <article class="product-document">
+          <section>
+            <span class="product-number">01 / 设计目的</span>
+            <h2>让进度跟着自然阅读走</h2>
+            <p>抄写时，人会在看原文、写字和思考之间切换。离开原文后，常常需要重新寻找刚才的位置。EchoMark 希望减少这段来回确认的负担：用户可以像平常一样阅读，不必为了软件逐字朗读，也不必改变抄写习惯。</p>
+            <p>语音是可选的辅助线索。读到某个词时，标记就尝试移动到原文中的对应位置；没有读出一小段或临时跳读时，系统会从当前标记附近寻找匹配内容。</p>
+          </section>
+          <section>
+            <span class="product-number">02 / 使用逻辑</span>
+            <h2>从载入原文到继续抄写</h2>
+            <ol>
+              <li>导入文档或粘贴文字，先在阅读区域确认内容。</li>
+              <li>需要语音辅助时，点击“开始标记抄写”并允许麦克风；软件会持续监听，直到手动停止。</li>
+              <li>照常抄写。语音识别结果会与原文对齐，推动已读高亮和当前位置标记。</li>
+              <li>如果位置需要校正，可使用语音跳转、快进、撤回，或选中文字后手动调整。</li>
+            </ol>
+            <p>查找按文本顺序和当前位置推进。短距离未匹配时会逐步扩大范围，避免每次从文档开头重新寻找；语音跳读时也可以提供目标文字、字数或百分比。</p>
+          </section>
+          <section>
+            <span class="product-number">03 / 文档与版面</span>
+            <h2>让原文更容易辨认</h2>
+            <p>EchoMark 支持 TXT、Markdown、HTML、DOCX、PDF、Excel 工作簿、ODS 和 CSV。显示时尽量保留标题、段落、列表、表格网格、页面比例和可提取的基本格式；定位时则只把文字纳入索引，边框、网格线和装饰空白不作为阅读文字。</p>
+            <p>PDF 通过页面图像保留原有图形和表格外观，并叠加可定位的文字层。表格文件按工作表与行列展示。复杂浮动对象、扫描 PDF 的文字识别以及部分高级格式仍受浏览器解析库能力限制。</p>
+          </section>
+          <section>
+            <span class="product-number">04 / 实现思路</span>
+            <h2>浏览器内处理，轻量呈现</h2>
+            <p>应用由静态网页构成，通过响应式布局适配电脑、平板和手机。文件解析、文字索引、阅读标记和配色设置在浏览器中运行；PDF 和电子表格按需加载对应的网页解析库。无需安装桌面程序或注册账户。</p>
+            <p>阅读进度会按文档保存在当前浏览器，重新打开同一文档时可以接着阅读。不同设备、浏览器之间目前不会自动同步这些本地数据。</p>
+          </section>
+          <section>
+            <span class="product-number">05 / 麦克风与隐私</span>
+            <h2>由用户决定何时监听</h2>
+            <p>只有点击开始后，网页才请求麦克风。顶栏状态点在监听时缓慢呼吸，检测到音量变化时短暂脉冲，帮助确认声音是否进入网页。音量动画只在本机浏览器计算，不录制、不保存、不上传音频。</p>
+            <p>语音转文字由当前浏览器或设备提供的 Web Speech 服务完成，其可用性和处理方式取决于浏览器。EchoMark 自身不提供服务器端文档存储、账号或云同步。</p>
+          </section>
+        </article>
+        <nav class="product-links" aria-label="相关页面">
+          <a class="small-button" href="./">返回 EchoMark</a>
+          <a href="https://github.com/4324264/EchoMark/releases">在 GitHub 查看版本与发行说明 ↗</a>
+        </nav>
+      </main>
+      <footer class="footnote"><span>EchoMark v0.2.9</span><span>产品目标与实现边界</span></footer>
+    </div>
+  </body>
+</html>
