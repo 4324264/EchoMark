@@ -1,0 +1,13 @@
+{
+  "name": "EchoMark v0.2.7 — 抄写进度标记",
+  "short_name": "EchoMark 0.2.7",
+  "description": "自然朗读自动标记，并用语音或选区调整阅读位置。",
+  "lang": "zh-CN",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f5f4ef",
+  "theme_color": "#f5f4ef",
+  "icons": [
+    { "src": "./icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

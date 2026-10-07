@@ -8,10 +8,11 @@ EchoMark 是一个网页阅读进度标记工具。开始监听后，抄写时�
 
 ## 功能
 
-- 导入 TXT、Markdown、HTML、DOCX 和可提取文字的 PDF，也可以粘贴文本；HTML、DOCX、PDF 会保留常见排版结构。
+- 导入 TXT、Markdown、HTML、DOCX、PDF、Excel/ODS，也可以粘贴文本；HTML、DOCX、PDF 和表格保留常见结构。
 - 中文、英语、日语和韩语语音识别（取决于浏览器支持）。
 - 已读文字高亮、当前位置跟随识别结果移动，并显示进度、字符数和预计时间。
 - 按文档名称与内容指纹在当前浏览器保存进度；重新导入同一文件时恢复位置。
+- 根据监听期间已推进的字符速度手动刷新剩余时间估算，并按文档保存在当前浏览器。
 - 自定义界面背景、标记和正文颜色，并在浏览器中保存偏好。
 - 可安装为渐进式网页应用（PWA），并缓存网页静态资源。
 
@@ -29,7 +30,7 @@ python -m http.server 8000
 
 ## 支持的文档
 
-DOCX 使用浏览器内置 `DecompressionStream` 提取正文。PDF 导入时按需从 jsDelivr 加载 Mozilla PDF.js 6.3.289；首次导入需要网络。PDF 只提取可选择的文本，扫描件需要先做 OCR。v0.2.6 会保留常见段落、标题、列表、表格和格式；PDF 文字按页面坐标从上到下、同一行从左到右排列。复杂 DOCX/PDF 版式、多栏顺序、图片和浮动对象无法保证完全还原。
+DOCX 使用浏览器内置 `DecompressionStream` 提取正文。PDF 导入按需加载 Mozilla PDF.js 并显示本地渲染的页面底图与可索引文字层；扫描件可以显示原页，扫描件 OCR 后才能语音匹配。XLSX、XLS、XLSM、XLSB、ODS 和 CSV 导入按需加载 SheetJS Community Edition，显示工作表网格并保留部分单元格格式及可读取的文本批注；高级格式、图表、图片和线程式评论无法保证还原，最多处理 5 万格。复杂 DOCX/PDF 版式、多栏顺序和浮动对象也无法保证完全还原。
 
 ## 仓库结构
 
@@ -48,7 +49,8 @@ DOCX 使用浏览器内置 `DecompressionStream` 提取正文。PDF 导入时按
 | `versions/v0.2.3/` | 监听自动恢复、分段语音位置指令修复 |
 | `versions/v0.2.4/` | 静音时维持麦克风流并恢复监听 |
 | `versions/v0.2.5/` | 标注语音指令并提供悬停/点击说明 |
-| `versions/v0.2.6/` | 保留格式文档版面，按左到右、上到下索引；当前 Pages 部署目标 |
+| `versions/v0.2.6/` | 保留常见文档排版并按视觉顺序索引 |
+| `versions/v0.2.7/` | 显示 PDF 页面图形/批注、导入 Excel、按监听速度估算剩余时间；当前 Pages 部署目标 |
 
 GitHub Pages 由 `.github/workflows/deploy-pages.yml` 部署。仓库设置中的 Pages Source 需要选择 **GitHub Actions**。每个版本均独立保存在 `versions/vX.Y.Z/`，版本号、变更记录、网页页脚、服务缓存名和部署目标一同更新。
 
