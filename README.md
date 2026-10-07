@@ -8,7 +8,7 @@ EchoMark 是一个网页阅读进度标记工具。开始监听后，抄写时�
 
 ## 功能
 
-- 导入 TXT、Markdown、HTML、DOCX 和可提取文字的 PDF，也可以粘贴文本。
+- 导入 TXT、Markdown、HTML、DOCX 和可提取文字的 PDF，也可以粘贴文本；HTML、DOCX、PDF 会保留常见排版结构。
 - 中文、英语、日语和韩语语音识别（取决于浏览器支持）。
 - 已读文字高亮、当前位置跟随识别结果移动，并显示进度、字符数和预计时间。
 - 按文档名称与内容指纹在当前浏览器保存进度；重新导入同一文件时恢复位置。
@@ -25,11 +25,11 @@ python -m http.server 8000
 
 然后在浏览器打开 <http://localhost:8000>。也可以把静态文件部署到 HTTPS 网站。无需构建步骤或 npm 依赖。
 
-点击“开始标记抄写”后才会请求麦克风。识别能力由浏览器或系统提供，会因浏览器、设备、地区及网络而异。首次权限检查后会立即关闭临时音频流。
+点击“开始标记抄写”后才会请求麦克风。识别能力由浏览器或系统提供，会因浏览器、设备、地区及网络而异。监听期间保持麦克风流，识别服务因静音结束时会尝试恢复；点击“停止监听”后释放麦克风。
 
 ## 支持的文档
 
-DOCX 使用浏览器内置 `DecompressionStream` 提取正文。PDF 导入时按需从 jsDelivr 加载 Mozilla PDF.js 6.3.289；首次导入需要网络。PDF 只提取可选择的文本，扫描件需要先做 OCR。复杂 DOCX/PDF 版式、表格和多栏内容的顺序可能与原文件不同。
+DOCX 使用浏览器内置 `DecompressionStream` 提取正文。PDF 导入时按需从 jsDelivr 加载 Mozilla PDF.js 6.3.289；首次导入需要网络。PDF 只提取可选择的文本，扫描件需要先做 OCR。v0.2.6 会保留常见段落、标题、列表、表格和格式；PDF 文字按页面坐标从上到下、同一行从左到右排列。复杂 DOCX/PDF 版式、多栏顺序、图片和浮动对象无法保证完全还原。
 
 ## 仓库结构
 
@@ -47,9 +47,10 @@ DOCX 使用浏览器内置 `DecompressionStream` 提取正文。PDF 导入时按
 | `versions/v0.2.2/` | 电脑、平板和手机视口自适应的版本 |
 | `versions/v0.2.3/` | 监听自动恢复、分段语音位置指令修复 |
 | `versions/v0.2.4/` | 静音时维持麦克风流并恢复监听 |
-| `versions/v0.2.5/` | 标注语音指令并提供悬停/点击说明；当前 Pages 部署目标 |
+| `versions/v0.2.5/` | 标注语音指令并提供悬停/点击说明 |
+| `versions/v0.2.6/` | 保留格式文档版面，按左到右、上到下索引；当前 Pages 部署目标 |
 
-GitHub Pages 由 `.github/workflows/deploy-pages.yml` 部署。仓库设置中的 Pages Source 需要选择 **GitHub Actions**。
+GitHub Pages 由 `.github/workflows/deploy-pages.yml` 部署。仓库设置中的 Pages Source 需要选择 **GitHub Actions**。每个版本均独立保存在 `versions/vX.Y.Z/`，版本号、变更记录、网页页脚、服务缓存名和部署目标一同更新。
 
 ## 隐私和限制
 
