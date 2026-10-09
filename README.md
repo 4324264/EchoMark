@@ -65,4 +65,4 @@ GitHub Pages 由 `.github/workflows/deploy-pages.yml` 部署。仓库设置中�
 
 ## 参与项目
 
-请先阅读 [贡献指南](CONTRIBUTING.md)、[支持说明](SUPPORT.md) 和 [安全问题报告说明](SECURITY.md)。项目当前**没有添加开源许可证**，公开可见不代表获得复制、修改或再分发代码的许可。
+请先阅读 [贡献指南](CONTRIBUTING.md)、[支持说明](SUPPORT.md) 和 [安全问题报告说明](SECURITY.md)。项目当前使用**Creative Commons Attribution-NonCommercial 4.0 (CC BY-NC 4.0)**，公开可见不代表获得复制、修改或再分发代码的许可。
