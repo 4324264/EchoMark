@@ -54,7 +54,8 @@ DOCX 使用浏览器内置 `DecompressionStream` 提取正文。PDF 导入按需
 | `versions/v0.2.7/` | 显示 PDF 页面图形/批注、导入 Excel、按监听速度估算剩余时间 |
 | `versions/v0.2.8/` | 语音活动状态点、重复目标连续撤回和预置配色；当前 Pages 部署目标 |
 | `versions/v0.2.9/` | 独立的产品设计与实现说明页面 |
-| `versions/v0.3.0/` | 整页展开/独立阅读窗切换；当前 Pages 部署目标 |
+| `versions/v0.3.0/` | 整页展开/独立阅读窗切换 |
+| `versions/v0.3.1/` | 减少阅读窗下方空白，扩大正文显示区域；当前 Pages 部署目标 |
 
 GitHub Pages 由 `.github/workflows/deploy-pages.yml` 部署。仓库设置中的 Pages Source 需要选择 **GitHub Actions**。每个版本均独立保存在 `versions/vX.Y.Z/`，版本号、变更记录、网页页脚、服务缓存名和部署目标一同更新。
 
